@@ -1,0 +1,169 @@
+<div class="nav background">
+  <%= link_to root_path, class: "left-arrow-link background" do %>
+    <%= image_tag 'left-arrow.svg', class: "left-arrow background" %>
+  <% end %>
+  <p class="registration background">REGISTER</p>
+  <p class="background" id="next-btn">Next</p>
+</div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  
+  <div class="field-pic">
+    <div id="image-preview">
+      <% if resource.new_record? %>
+        <i class="default-photo-icon"></i>
+      <% elsif resource.photo.attached? %>
+        <%= image_tag resource.photo.variant(resize: '100x100'), class: 'uploaded-photo' %>
+      <% end %>
+    </div>
+    <%= label_tag 'file-upload', 'Upload Photo', class: 'custom-file-upload' %>
+    <%= f.file_field :photo, id: 'file-upload', class: 'file-upload' %>
+  </div>
+  
+  <div class="field">
+    <%= f.text_field :name, autofocus: true, autocomplete: "email", placeholder: "Full name", class: "input" %>
+  </div>
+  
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "input" %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", class: "input" %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm password", class: "input"%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", id: 'signup-btn', style: 'display: none;' %>
+  </div>
+<% end %>
+
+<style>
+  .custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: white;
+  }
+
+  .file-upload {
+    display: none;
+  }
+
+  .field-pic {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: white;
+    margin-top: 5%;
+    padding: 2%;
+  }
+
+  .field {
+    width: 100%;
+    background: white;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #image-preview {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    background: white;
+  }
+
+  .uploaded-photo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  .default-photo-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 1px dashed #ccc;
+    border-radius: 100%;
+    background: url('https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png') center center no-repeat;
+    background-size: 50%;
+    background-color: white;
+    margin-right: 10px;
+  }
+  
+  .left-arrow-link {
+    text-decoration: none;
+    background-color: #3778c2; 
+  }
+  
+  .nav {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+  }
+
+  .background {
+    background-color: #3778c2; 
+  }
+
+  .input {
+    background-color: white;
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    border-top: 2px solid #F0F2F1;
+  }
+
+  .registration {
+    font-size: 25px;
+  }
+  #next-btn{
+    cursor: pointer;
+
+  }
+
+  .input:focus {
+    outline: none;
+  }
+</style>
+<script>
+  var fileUpload = document.getElementById('file-upload');
+  var imagePreview = document.getElementById('image-preview');
+  var defaultIcon = document.createElement('i');
+  defaultIcon.className = 'default-photo-icon';
+
+  fileUpload.addEventListener('change', function() {
+    imagePreview.innerHTML = '';
+
+    if (fileUpload.files && fileUpload.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var image = document.createElement('img');
+        image.src = e.target.result;
+        image.className = 'uploaded-photo';
+        imagePreview.appendChild(image);
+      }
+
+      reader.readAsDataURL(fileUpload.files[0]);
+    } else {
+      imagePreview.appendChild(defaultIcon);
+    }
+  });
+  document.getElementById("next-btn").addEventListener("click", function() {
+    document.getElementById("signup-btn").click();
+  });
+</script>
