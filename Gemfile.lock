@@ -260,7 +260,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
-  devise (~> 4.9)
+  devise
   font-awesome-rails
   importmap-rails
   jbuilder
