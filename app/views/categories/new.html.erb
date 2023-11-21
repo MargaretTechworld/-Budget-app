@@ -1,0 +1,9 @@
+<%= form_with(model: @category, local: true) do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  
+    <%= form.label :icon %>
+    <%= form.file_field :icon %>
+  
+    <%= form.submit %>
+  <% end %>

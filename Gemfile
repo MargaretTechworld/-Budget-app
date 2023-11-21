@@ -9,8 +9,8 @@ gem 'rails', '~> 7.1.2'
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
+gem 'font-awesome-rails'
 gem 'pg', '~> 1.1'
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
 
@@ -55,7 +55,7 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
-
+  gem 'letter_opener'
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
@@ -65,3 +65,4 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+gem 'devise'
