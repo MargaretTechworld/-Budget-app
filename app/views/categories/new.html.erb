@@ -1,9 +1,84 @@
-<%= form_with(model: @category, local: true) do |form| %>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  
-    <%= form.label :icon %>
-    <%= form.file_field :icon %>
-  
-    <%= form.submit %>
+<div class="nav background">
+<%= link_to categories_path, class: "left-arrow-link background" do %>
+  <%= image_tag 'left-arrow.svg', class: "left-arrow background" %>
   <% end %>
+<p class="registration background">CATEGORIES</p>
+<p class="background" id="next-btn">Next</p>
+</div>
+<%= form_with(model: @category, local: true) do |form| %>
+  <div class="field">
+    <%= form.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Name", class: "input" %>
+  </div>
+  <div class="field">
+    <%= form.file_field :icon, class: "input" %>
+    </div>
+    <div class="actions">
+    <%= form.submit "Sign up", id: 'signup-btn', style: 'display: none;' %>
+  </div>
+  <% end %>
+  <style>
+  
+
+.field-pic {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: white;
+  margin-top: 5%;
+  padding: 2%;
+}
+
+.field {
+  width: 100%;
+  background: white;
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.left-arrow-link {
+  text-decoration: none;
+  background-color: #3778c2; 
+}
+
+.nav {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+}
+
+.background {
+  background-color: #3778c2; 
+}
+
+.input {
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  font-size: 15px;
+  border: none;
+  border-top: 2px solid #F0F2F1;
+}
+
+.registration {
+  font-size: 25px;
+}
+#next-btn{
+  cursor: pointer;
+
+}
+
+.input:focus {
+  outline: none;
+}
+</style>
+  <script>
+  document.getElementById("next-btn").addEventListener("click", function() {
+    document.getElementById("signup-btn").click();
+  });
+</script>

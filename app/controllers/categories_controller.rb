@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
+  include Devise::Controllers::Helpers
+  before_action :authenticate_user!
   def index
     @categories = Category.where(user: current_user).order(created_at: :desc)
   end
-
-  def show; end
 
   def new
     @category = Category.new
