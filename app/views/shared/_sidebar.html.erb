@@ -1,0 +1,5 @@
+<div id="sidebar">
+  <%= image_tag current_user.photo %>
+  <%= link_to "sign_out", destroy_user_session_path, data:{turbo_method: :delete} %>
+
+</div>

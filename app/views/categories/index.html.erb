@@ -2,17 +2,13 @@
 <div class="category-index">
 <div>
   <div class="nav background">
-    <%= link_to root_path, class: "left-arrow-link background" do %>
-      <%= image_tag 'menu.svg', class: "left-arrow background" %>
+  <%= link_to root_path, class: "left-arrow-link background" do %>
+    <%= image_tag 'left-arrow.svg', class: "left-arrow background" %>
     <% end %>
-    <p class="registration background">CATEGORIES</p>
-    <%= image_tag 'search.svg', class: "left-arrow background" %>
+  <p class="registration background">CATEGORIES</p>
+  <%= link_to "SIGN OUT", destroy_user_session_path, data:{turbo_method: :delete}, class: "sign-out-btn background" %>
   </div>
-  
-  <div class="total">
-    <p>total budget</p>
-    <p>le 300</p>
-  </div>
+ 
   <% @categories.each do |category| %>
   <div class="category-list-div">
     <div class="category-list">
@@ -23,8 +19,9 @@
 <% end %>
       <div class="text white">
         <div class="food-description white">
-          <p class="white"><%= category.name%></p><br>
-          <p class="white"> le300</p>
+       
+          <p class="white"><%= link_to category.name, category_items_path(category) %></p><br>
+          <p class="white"> Le <%= format_amount(category.items.sum(:amount)) %></p>
         </div>
         <p class="white date"><%= category.created_at.strftime("%d %B %Y") %></p>
       </div>
@@ -36,11 +33,18 @@
 </div>
 
 <style>
+.sign-out-btn{
+color: white;
+padding:0.4%;
+border: 1px solid white;
+font-size: 13px;
+}
   .date {
     margin-top: 20px;
   }
   a{
     text-decoration: none;
+    background:none;
   }
   
   .text {
@@ -101,10 +105,11 @@
   }
   
   .add-category {
- padding: 20px 80px 20px 80px;
+    width:100%;
+ padding: 35px;
     background-color: #5fb523;
     color: white;
-    border: none;
+    border: 1px solid #F0F2F1;
     font-size: 18px;
     align-self: center;
     text-align: center;
@@ -171,189 +176,14 @@
     width: 20%;
     height:80px
   }
-  
-  .nav {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    justify-content: space-between;
-    padding: 2%;
-    align-items: center;
-    color: white;
-    font-size: 18px;
-  }
-  
-  .background {
-    background-color: #3778c2;
-  }
-  
-  .input {
-    background-color: white;
-    width: 100%;
-    height: 30px;
-    font-size: Sure! I can help you organize your code. Here's the organized version:
-
-```html
-<div class="category-index">
-  <div class="nav background">
-    <%= link_to root_path, class: "left-arrow-link background" do %>
-      <%= image_tag 'menu.svg', class: "left-arrow background" %>
-    <% end %>
-    <p class="registration background">CATEGORIES</p>
-    <%= image_tag 'search.svg', class: "left-arrow background" %>
-  </div>
-  
-  <div class="total">
-    <p>total budget</p>
-    <p>le 300</p>
-  </div>
-  
-  <div class="category-list-div">
-    <div class="category-list">
-      <%= image_tag 'food.svg', class: "left-arrow white" %>
-      <div class="test white">
-        <div class="food-description white">
-          <p class="white">food</p><br>
-          <p class="white">le 300</p>
-        </div>
-        <p class="white date">12 june 2020</p>
-      </div>
-    </div>
-  </div>
-  
-  <button class="add-category">Add category</button>
-</div>
-
-<style>
-  .date {
-    margin-top: 20px;
-  }
-  
-  .text {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-  }
-  
-  .food-description {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .white {
-    background-color: white;
-  }
-  
-  .category-list-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .category-list {
-    width: 90%;
-    background: white;
-    padding: 2%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    height: fit-content;
-    font-size: 20px;
-  }
-  
-  .total {
-    width: 100%;
-    background: white;
-    padding: 2%;
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-  }
-  
-  .total p {
-    background: white;
-    color: #434b54;
-    font-size: 20px;
-    text-align: center;
-  }
-  
-  .category-index {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .add-category {
-    margin-top: 30px;
-    width: 80%;
-    background-color: #5fb523;
-    color: white;
-    border: none;
-    height: 60px;
-    font-size: 18px;
-    align-self: center;
-  }
-  
-  .custom-file-upload {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background: white;
-  }
-  
-  .file-upload {
-    display: none;
-  }
-  
-  .field-pic {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background: white;
-    margin-top: 5%;
-    padding: 2%;
-  }
-  
-  .field {
-    width: 100%;
-    background: white;
-    padding: 2%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  #image-preview {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    background: white;
-  }
-  
-  .uploaded-photo {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 100%;
-    margin-right: 10px;
-  }
-  
-  .default-photo-icon {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    border: 1px dashed #ccc;
-    border-radius: 100%;
-    background: url('https://cdn3.iconfinder.com/data/icons/essential-rounded/64/Rounded-31-512.png') center center no-repeat;
-    background-size: 50%;
-    background-color: white;
-    margin-right: 10px;
-  }
-  
-  .left-arrow-link {
+  .img-user {
     text-decoration: none;
     background-color: #3778c2;
+    width: 50px;
+    height:50px;
+    border-radius:100%
   }
+  
   
   .nav {
     width: 100%;
@@ -374,4 +204,5 @@
     background-color: white;
     width: 100%;
     height: 30px;
-    font-size:
+}
+  </style>

@@ -19,11 +19,17 @@
   </div>
 <% end %>
 <div class="centered-link">
+<div class="links-check">
 <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <%= link_to "Forgot your password?", new_password_path(resource_name), class: "forget-password" %><br>
 <% end %>
 </div>
+</div>
+
 <style>
+.links-check{
+text-align: center;
+}
   .forget-password{
     text-decoration: none;
     color: #434b54;

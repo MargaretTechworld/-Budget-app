@@ -9,18 +9,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   
-  <div class="field-pic">
-    <div id="image-preview">
-      <% if resource.new_record? %>
-        <i class="default-photo-icon"></i>
-      <% elsif resource.photo.attached? %>
-        <%= image_tag resource.photo.variant(resize: '100x100'), class: 'uploaded-photo' %>
-      <% end %>
-    </div>
-    <%= label_tag 'file-upload', 'Upload Photo', class: 'custom-file-upload' %>
-    <%= f.file_field :photo, id: 'file-upload', class: 'file-upload' %>
-  </div>
-  
   <div class="field">
     <%= f.text_field :name, autofocus: true, autocomplete: "email", placeholder: "Full name", class: "input" %>
   </div>
@@ -141,29 +129,6 @@
 }
 </style>
 <script>
-  var fileUpload = document.getElementById('file-upload');
-  var imagePreview = document.getElementById('image-preview');
-  var defaultIcon = document.createElement('i');
-  defaultIcon.className = 'default-photo-icon';
-
-  fileUpload.addEventListener('change', function() {
-    imagePreview.innerHTML = '';
-
-    if (fileUpload.files && fileUpload.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        var image = document.createElement('img');
-        image.src = e.target.result;
-        image.className = 'uploaded-photo';
-        imagePreview.appendChild(image);
-      }
-
-      reader.readAsDataURL(fileUpload.files[0]);
-    } else {
-      imagePreview.appendChild(defaultIcon);
-    }
-  });
   document.getElementById("next-btn").addEventListener("click", function() {
     document.getElementById("signup-btn").click();
   });
